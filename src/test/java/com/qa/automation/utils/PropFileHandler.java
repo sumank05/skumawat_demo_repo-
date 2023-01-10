@@ -14,7 +14,7 @@ public class PropFileHandler {
         String value;
         try 
         {
-            FileInputStream in = new FileInputStream("src/test/resources/testData/Config.properties");
+            FileInputStream in = new FileInputStream("src/test/resources/testdata/Config.properties");
             try 
             {
                 config.load(in);
