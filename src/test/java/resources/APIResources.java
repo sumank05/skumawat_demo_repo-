@@ -7,8 +7,15 @@ public enum APIResources {
     LogOnUserPassword("/LogOnUser/Password"),
     PageActionRights("/LogOnUser/refresh/LogOnUser/PageAccessRight/M"),
     UserLogOff("/LogOnUser/LogOff"),
-    UserChatToken("/LogOnUser/chat/token");
-    
+    UserChatToken("/LogOnUser/chat/token"),
+	TriggerType("/Engage/Announcement/TriggerType"),
+	RecurringType("/Engage/Announcement/RecurringType"),
+	EventType("Engage/Announcement/EventType/2"),
+	Announcement("/Engage/Announcement"),
+	Tag("/Engage/Announcement/Tag"),
+	SuperAnnouncement("/Engage/Super/Announcement/3"),
+	EmployeeAnnouncement("/Engage/Announcement/6/4340");
+	
     private String resource;
     
 
