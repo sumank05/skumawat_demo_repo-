@@ -1,12 +1,15 @@
 package com.qa.automation.api.stepDefinations;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
-import resources.APIResources;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
-import com.jayway.jsonpath.JsonPath;
+
 import com.qa.automation.actions.API_PageActions;
 import com.qa.automation.utils.PropFileHandler;
 
@@ -14,63 +17,95 @@ public class CommonApiStepDefinations {
     Response response;
     API_PageActions apiPage = new API_PageActions();
 
-    @Given("I want make a get call to {string} API using {string} method")
-    public void getCallToHROneSanity(String resource,String method) {
-        APIResources apiEndPoint = APIResources.valueOf(resource);
-        RequestSpecification request = apiPage.requestData(PropFileHandler.readProperty("api_host"),apiEndPoint.getResource());
-        if(method.equalsIgnoreCase("POST"))
-        {
+    @Given("I want make a get call to {string} {string} API using {string} method")
+    public Response get_call_to_Hrone_API(String endPointGroup, String endPointName, String method)
+            throws Exception {
+        RequestSpecification request = apiPage.requestData(PropFileHandler.readProperty("api_host"),
+                PropFileHandler.readAPIJsonFile(endPointGroup, endPointName));
+        if (method.equalsIgnoreCase("POST")) {
             response = request.post();
-        }
-        else if(method.equalsIgnoreCase("GET"))
-        {
+        } else if (method.equalsIgnoreCase("GET")) {
             response = request.get();
         }
         System.out.println("Response as String : " + response.asString());
         System.out.println("Response Code : " + response.getStatusCode());
         Assert.assertEquals(200, response.getStatusCode());
+        return response;
     }
 
-//    @Given("I want to make a get call to {string} API")
-//    public void getCallForLogOnUserPassword() {
-//        String endpoint = "/LogOnUser/Password";
-//        RequestSpecification request = apiPage.requestData(endpoint);
-//        request.queryParam("employeeId", "XYZ0455");
-//        response = request.get();
-//        System.out.println("Response as String : " + response.asString());
-//        System.out.println("Response Code : " + response.getStatusCode());
-//        Assert.assertEquals(200, response.getStatusCode());
-//    }
-//
-//    @Given("I want to make a get call to {string} API")
-//    public void getCallForPageAccessRights() {
-//        String endpoint = "/LogOnUser/refresh/LogOnUser/PageAccessRight/M";
-//        RequestSpecification request = apiPage.requestData(endpoint);
-//        response = request.get();
-//        System.out.println("Response as String : " + response.asString());
-//        System.out.println("Response Code : " + response.getStatusCode());
-//        Assert.assertEquals(200, response.getStatusCode());
-//    }
-//
-//    @Given("I want to make a get call to {string} API")
-//    public void getCallForUserLogOff() {
-//        String endpoint = "/LogOnUser/LogOff";
-//        RequestSpecification request = apiPage.requestData(endpoint);
-//        response = request.get();
-//        System.out.println("Response as String : " + response.asString());
-//        System.out.println("Response Code : " + response.getStatusCode());
-//        Assert.assertEquals(200, response.getStatusCode());
-//    }
-//
-//    @Given("I want to make a get call to {string} API")
-//    public void getCallForChatToken() {
-//        String endpoint = "/LogOnUser/chat/token";
-//        RequestSpecification request = apiPage.requestData(endpoint);
-//        response = request.get();
-//        System.out.println("Response as String : " + response.asString());
-//        System.out.println("Response Code : " + response.getStatusCode());
-//        Assert.assertEquals(200, response.getStatusCode());
-//    }
+    @Given("I want make a get call to {string} {string} API using {string} method with based on {string} value")
+    public Response get_Call_To_Hrone_API_basedOn(String endPointGroup, String endPointName,
+            String method, String basedOn) throws Exception {
+        String endpoint = (PropFileHandler.readAPIJsonFile(endPointGroup, endPointName)) + basedOn;
+        RequestSpecification request =
+                apiPage.requestData(PropFileHandler.readProperty("api_host"), endpoint);
+        if (method.equalsIgnoreCase("POST")) {
+            response = request.post();
+        } else if (method.equalsIgnoreCase("GET")) {
+            response = request.get();
+        }
+        System.out.println("Response as String : " + response.asString());
+        System.out.println("Response Code : " + response.getStatusCode());
+        Assert.assertEquals(200, response.getStatusCode());
+        return response;
+    }
+
+    @When("I verify response value from {string} API reponse")
+    public void verifyResponseValue(String resource) throws Exception {
+        // Response res = getCallToHROneSanity(resource,"GET");
+        // ResponseBody body = res.getBody();
+        // String bodyStringValue = body.asString();
+        // JsonPath jsonPathEvaluator = res.jsonPath();
+        // JsonPath j = new JsonPath(res.asString());
+        // String triggerTypeId = jsonPathEvaluator.get("triggerTypeId");
+        // String triggerName = jsonPathEvaluator.get("triggerName");
+        // Assert.assertTrue(triggerTypeId.equals(1));
+        // Assert.assertTrue(triggerName.equals("One time"));
+
+    }
+
+
+
+    // @Given("I want to make a get call to {string} API")
+    // public void getCallForLogOnUserPassword() {
+    // String endpoint = "/LogOnUser/Password";
+    // RequestSpecification request = apiPage.requestData(endpoint);
+    // request.queryParam("employeeId", "XYZ0455");
+    // response = request.get();
+    // System.out.println("Response as String : " + response.asString());
+    // System.out.println("Response Code : " + response.getStatusCode());
+    // Assert.assertEquals(200, response.getStatusCode());
+    // }
+    //
+    // @Given("I want to make a get call to {string} API")
+    // public void getCallForPageAccessRights() {
+    // String endpoint = "/LogOnUser/refresh/LogOnUser/PageAccessRight/M";
+    // RequestSpecification request = apiPage.requestData(endpoint);
+    // response = request.get();
+    // System.out.println("Response as String : " + response.asString());
+    // System.out.println("Response Code : " + response.getStatusCode());
+    // Assert.assertEquals(200, response.getStatusCode());
+    // }
+    //
+    // @Given("I want to make a get call to {string} API")
+    // public void getCallForUserLogOff() {
+    // String endpoint = "/LogOnUser/LogOff";
+    // RequestSpecification request = apiPage.requestData(endpoint);
+    // response = request.get();
+    // System.out.println("Response as String : " + response.asString());
+    // System.out.println("Response Code : " + response.getStatusCode());
+    // Assert.assertEquals(200, response.getStatusCode());
+    // }
+    //
+    // @Given("I want to make a get call to {string} API")
+    // public void getCallForChatToken() {
+    // String endpoint = "/LogOnUser/chat/token";
+    // RequestSpecification request = apiPage.requestData(endpoint);
+    // response = request.get();
+    // System.out.println("Response as String : " + response.asString());
+    // System.out.println("Response Code : " + response.getStatusCode());
+    // Assert.assertEquals(200, response.getStatusCode());
+    // }
 
 
     /*
