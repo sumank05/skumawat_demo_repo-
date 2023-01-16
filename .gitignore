@@ -3,3 +3,4 @@
 /.allure/
 /.settings/
 /allure-results/
+.classpath

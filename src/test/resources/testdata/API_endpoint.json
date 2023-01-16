@@ -1,16 +1,15 @@
 {
-
-	"Authentication":{
-			  "AccessToken":"/oauth2/token"
-			},
-	"Account":{
-    		 "LogOnUSerDetail":"/LogOnUser/LogOnUserDetail",
-    		 "LogOnUserPassword":"/LogOnUser/Password",
-    		 "PageActionRights":"/LogOnUser/refresh/LogOnUser/PageAccessRight/",
-    		 "UserLogOff":"/LogOnUser/LogOff",
-    		 "UserChatToken":"/LogOnUser/chat/token"
-          	},
-    "Announcement":{
-    		"TriggerType":"/Engage/Announcement/TriggerType"
-    		}
+	"Authentication": {
+		"AccessToken": "/oauth2/token"
+	},
+	"Account": {
+		"LogOnUSerDetail": "/LogOnUser/LogOnUserDetail",
+		"LogOnUserPassword": "/LogOnUser/Password",
+		"PageActionRights": "/LogOnUser/refresh/LogOnUser/PageAccessRight/",
+		"UserLogOff": "/LogOnUser/LogOff",
+		"UserChatToken": "/LogOnUser/chat/token"
+	},
+	"Announcement": {
+		"TriggerType": "/Engage/Announcement/TriggerType"
+	}
 }
