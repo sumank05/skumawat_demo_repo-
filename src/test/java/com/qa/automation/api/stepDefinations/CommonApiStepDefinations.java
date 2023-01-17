@@ -17,39 +17,48 @@ public class CommonApiStepDefinations {
     Response response;
     API_PageActions apiPage = new API_PageActions();
 
-    @Given("I want make a get call to {string} {string} API using {string} method")
+    @Given("I want to make a get call to {string} {string} API using {string} method")
     public Response get_call_to_Hrone_API(String endPointGroup, String endPointName, String method)
             throws Exception {
         RequestSpecification request = apiPage.requestData(PropFileHandler.readProperty("api_host"),
                 PropFileHandler.readAPIJsonFile(endPointGroup, endPointName));
-        if (method.equalsIgnoreCase("POST")) {
-            response = request.post();
-        } else if (method.equalsIgnoreCase("GET")) {
+        if (method.equalsIgnoreCase("GET")) {
             response = request.get();
         }
-        System.out.println("Response as String : " + response.asString());
         System.out.println("Response Code : " + response.getStatusCode());
         Assert.assertEquals(200, response.getStatusCode());
         return response;
     }
-
-    @Given("I want make a get call to {string} {string} API using {string} method with based on {string} value")
-    public Response get_Call_To_Hrone_API_basedOn(String endPointGroup, String endPointName,
-            String method, String basedOn) throws Exception {
-        String endpoint = (PropFileHandler.readAPIJsonFile(endPointGroup, endPointName)) + basedOn;
+    
+    @Given("I want to make a get call to Account {string} API using {string} method with based on {string} value")
+    public Response get_Call_To_Hrone_Account_API_BasedOn (String endPointName,
+        String method, String basedOn) throws Exception {
+        String endpoint = (PropFileHandler.readAPIJsonFile("Account", endPointName)) + basedOn;
         RequestSpecification request =
                 apiPage.requestData(PropFileHandler.readProperty("api_host"), endpoint);
-        if (method.equalsIgnoreCase("POST")) {
-            response = request.post();
-        } else if (method.equalsIgnoreCase("GET")) {
+        if (method.equalsIgnoreCase("GET")) {
             response = request.get();
         }
-        System.out.println("Response as String : " + response.asString());
         System.out.println("Response Code : " + response.getStatusCode());
         Assert.assertEquals(200, response.getStatusCode());
         return response;
     }
-
+    
+    @Given("I want to make a get call to Account {string} API using {string} method with {string} query param value")
+    public Response get_Call_To_Hrone_Account_API_QueryParam(String endPointName,
+        String method, String queryParam) throws Exception {
+        String endpoint = (PropFileHandler.readAPIJsonFile("Account", endPointName));
+        RequestSpecification request =
+                apiPage.requestData(PropFileHandler.readProperty("api_host"), endpoint);
+        request.queryParam(queryParam,PropFileHandler.readProperty(queryParam)); 
+        if (method.equalsIgnoreCase("GET")) {
+            response = request.get();
+        }
+        System.out.println("Response Code : " + response.getStatusCode());
+        Assert.assertEquals(200, response.getStatusCode());
+        return response;
+    }
+    
     @When("I verify response value from {string} API reponse")
     public void verifyResponseValue(String resource) throws Exception {
         // Response res = getCallToHROneSanity(resource,"GET");

@@ -16,4 +16,5 @@ public class API_PageActions extends BaseClass {
                         + getBearerTokenValue(PropFileHandler.readProperty("authentication_host")));
         return request;
     }
+    
 }
