@@ -25,6 +25,7 @@ public class BaseClass {
                 .param("loginType", 1)
                 .param("companyDomainCode", PropFileHandler.readProperty("companyDomainCode"))
                 .param("isEncrypted", 1);
+        System.out.println("????????????????????????????????? "+request.log().all());
         Response response = request.post();
         JsonPath jsonPathEvaluator = response.jsonPath();
         String access_token = "INVALID";

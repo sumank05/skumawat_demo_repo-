@@ -10,6 +10,45 @@
 		"UserChatToken": "/LogOnUser/chat/token"
 	},
 	"Announcement": {
-		"TriggerType": "/Engage/Announcement/TriggerType"
+		"TriggerType": "/Engage/Announcement/TriggerType",
+		"RecurringType": "/Engage/Announcement/RecurringType",
+		"EventType": "/Engage/Announcement/EventType/2",
+		"Announcement": "/Engage/Announcement",
+		"Tag": "/Engage/Announcement/Tag",
+		"SuperAnnouncement": "/Engage/Super/Announcement/3",
+		"EmployeeAnnouncement": "/Engage/Announcement/6/4340"
+	},
+	"Bank": {
+		"Bank": "/core/Bank",
+		"ServiceProvider": "/core/Bank/Provider/HDFC",
+		"BankActive": "/core/Bank/2/true",
+		"BankCode": "/core/Bank/2",
+		"PayMode": "/core/PayMode",
+		"BankBranch": "/core/BankBranch",
+		"BankBranchByCode": "/core/BankBranch/19",
+		"BankChallan": "/core/BankBranch/Challan",
+		"BankAlias": "/core/BankBranch/Alias",
+		"BankList": "/core/BankBranch/Register/List/19"
+	},
+	"Candidate": {
+		"CandidateStatus": "/recruitment/Candidate/Status",
+		"JoiningSource": "/recruitment/Candidate/JoiningSource",
+		"Category": "/recruitment/Candidate/JoiningSourceCategory",
+		"CandidateRound": "/recruitment/Candidate/Bucket",
+		"CandidateFilter": "/recruitment/Candidate/Filters",
+		"SocialProfile": "/recruitment/Candidate/Social"
+	},
+	"ApplicationVersion": {
+		"ApplicationVersion": "/core/ApplicationVersion"
+	},
+	"AssetCard": {
+		"AssetCard": "/Asset/CardMaster",
+		"FormID": "/Asset/Card/2"
+	},
+	"AssetGeneralSetting": {
+		"GeneralSettings": "/Asset/GeneralSetting"
+	},
+	"AutoArchiveServiceSetting": {
+		"AutoArchiveServiceSetting": "/core/autoarchaive"
 	}
 }
