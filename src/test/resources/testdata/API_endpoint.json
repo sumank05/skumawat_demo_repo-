@@ -5,9 +5,10 @@
 	"Account": {
 		"LogOnUSerDetail": "/LogOnUser/LogOnUserDetail",
 		"LogOnUserPassword": "/LogOnUser/Password",
-		"PageActionRights": "/LogOnUser/refresh/LogOnUser/PageAccessRight/",
+		"PageActionRights": "/LogOnUser/refresh/LogOnUser/PageAccessRight",
 		"UserLogOff": "/LogOnUser/LogOff",
-		"UserChatToken": "/LogOnUser/chat/token"
+		"UserChatToken": "/LogOnUser/chat/token",
+		"AuditTrail" : "/LogOnUser/AuditTrail"
 	},
 	"Announcement": {
 		"TriggerType": "/Engage/Announcement/TriggerType",

@@ -29,21 +29,29 @@ public class PropFileHandler {
         return value;
     }
 
-    public static String readAPIJsonFile(String groupName, String EndPointName) {
+    public static String readAPIJsonFile(String groupName, String endPointName) {
         JSONParser parser = new JSONParser();
         String APIEndPoint = null;
         try {
-            Object obj = parser.parse(new FileReader(
-                    "C:\\Users\\SumanKumawat\\Desktop\\projects\\hrone_bdd\\src\\test\\resources\\testdata\\API_endpoint.json"));
+            String filePath = System.getProperty("user.dir");
+            String DataFilepath = filePath+"/src/test/resources/testdata/API_endpoint.json";
+            Object obj = parser.parse(new FileReader(DataFilepath));
             JSONObject jsonObject = (JSONObject) obj;
             JSONObject endPointGroup = (JSONObject) jsonObject.get(groupName);
-            APIEndPoint = (String) endPointGroup.get(EndPointName);
-            System.out.println("#################" + APIEndPoint);
+            APIEndPoint = (String) endPointGroup.get(endPointName);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return APIEndPoint;
+    }
+    
+    public static String readAPIJsonFile(String groupName, String endPointName, String param1) {
+        return readAPIJsonFile(groupName, endPointName) + "/" + param1;
+    }
+    
+    public static String readAPIJsonFile(String groupName, String endPointName, String param1, String param2) {
+        return readAPIJsonFile(groupName, endPointName, param1) + "/" + param2;
     }
 
 }

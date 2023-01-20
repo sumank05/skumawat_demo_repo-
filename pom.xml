@@ -134,6 +134,9 @@
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>2.10.0</version>
+                <configuration>
+                <reportDirectory>${basedir}/target/allure-report</reportDirectory>
+            </configuration>
             </plugin>
             <!--<plugin>
                 <groupId>net.masterthought</groupId>

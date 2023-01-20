@@ -9,7 +9,7 @@ import io.restassured.specification.RequestSpecification;
 
 public class BaseClass {
 
-    public String getBearerTokenValue(String authenticationHost) throws Exception {
+    public static String getBearerTokenValue(String authenticationHost) throws Exception {
         final EncryptionUtil encryptionUtilInstance =
                 new EncryptionUtil(PropFileHandler.readProperty("companyDomainCode"));
         final String encryptedPassword =
@@ -25,7 +25,7 @@ public class BaseClass {
                 .param("loginType", 1)
                 .param("companyDomainCode", PropFileHandler.readProperty("companyDomainCode"))
                 .param("isEncrypted", 1);
-        System.out.println("????????????????????????????????? "+request.log().all());
+        //System.out.println("????????????????????????????????? "+request.log().all());
         Response response = request.post();
         JsonPath jsonPathEvaluator = response.jsonPath();
         String access_token = "INVALID";
