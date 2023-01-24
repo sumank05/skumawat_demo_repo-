@@ -1,5 +1,7 @@
 package com.qa.automation.api.stepDefinations;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
@@ -12,6 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
+import net.rcarz.jiraclient.BasicCredentials;
+import net.rcarz.jiraclient.CustomFieldOption;
+import net.rcarz.jiraclient.Field;
+import net.rcarz.jiraclient.Issue;
+import net.rcarz.jiraclient.JiraClient;
+import net.rcarz.jiraclient.JiraException;
 
 import com.qa.automation.actions.API_PageActions;
 import com.qa.automation.utils.PropFileHandler;
@@ -20,6 +28,38 @@ public class CommonApiStepDefinations {
     ValidatableResponse response;
     API_PageActions apiPage = new API_PageActions();
     Map<String,String>param = new HashMap<String,String>(); 
+
+    
+    
+    @After
+    public void screenShotAndConsoleLog(Scenario scenario) {
+        afterExecutionSetup(scenario);
+    }
+    
+    private void JIRAReport(Scenario scenario,String tags) {
+      String testcaseName = scenario.getName().toUpperCase().trim();
+      String m="Scenario Name: " + testcaseName +"got failed due to some assertion or exception";
+      JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/", new BasicCredentials("testingdemo.17@gmail.com", "A6hqLp1qLd0IXKkXkzGbA667"));
+      Issue issue;
+      try {
+        issue = jira.getIssue(tags);
+        issue.addComment(m);
+        issue.transition().execute("IN DEVELOPMENT");
+      }catch (JiraException e) {
+        e.printStackTrace();
+      }
+    }
+    
+    private void afterExecutionSetup(Scenario scenario) {
+      if (scenario.isFailed()) {
+          System.out.println("[INFO]: Scenario Tag Name >" + scenario.getSourceTagNames().toString());
+          for (String tags : scenario.getSourceTagNames()) {
+              if ("@DEMO".contains(tags)) {
+                JIRAReport(scenario, tags);
+              }
+          }
+      }
+  }
 
     @Given("I want to make a get call to {string} {string} API using GET method")
     public void get_call_to_Hrone_API(String endPointGroup, String endPointName) throws Throwable {
