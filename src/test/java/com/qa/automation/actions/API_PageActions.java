@@ -2,7 +2,7 @@ package com.qa.automation.actions;
 
 import java.util.Map;
 import org.json.simple.JSONObject;
-import com.qa.automation.utils.BaseClass;
+import com.qa.automation.utils.AuthenticationToken;
 import com.qa.automation.utils.PropFileHandler;
 import com.qa.automation.utils.RestWrapper;
 import io.restassured.RestAssured;
@@ -10,20 +10,11 @@ import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 
-public class API_PageActions extends BaseClass {
+public class API_PageActions extends AuthenticationToken {
     String BASE_URL;
     ValidatableResponse response;
     String apiHost = PropFileHandler.readProperty("api_host");
     RestWrapper restInstance = new RestWrapper(null);
-    
-    public RequestSpecification requestData(String apiHost, String apiEndPoint) throws Exception {
-        BASE_URL = apiHost + apiEndPoint;
-        RestAssured.baseURI = BASE_URL;
-        RequestSpecification request = RestAssured.given()
-                .header("Content-Type", "application/json").header("authorization", "Bearer "
-                        + getBearerTokenValue(PropFileHandler.readProperty("authentication_host")));
-        return request;
-    }
     
     public ValidatableResponse getRequest(String endPointGroup, String endPointName) throws Throwable
     {

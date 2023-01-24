@@ -34,11 +34,11 @@ public class CommonApiStepDefinations {
         Assert.assertEquals(200, response.extract().statusCode());
     }
     
-    @Given("I want to make a get call to {string} {string} API using GET method with {string} query param value")
-    public void get_Call_To_Hrone_Account_API_QueryParam(String endPointGroup,String endPointName,
-        String queryParam) throws Throwable {
-        param.put(queryParam, PropFileHandler.readProperty(queryParam));
-        response = apiPage.getRequestWithQueryParams(endPointGroup, endPointName,param);
+    @Given("I want to make a get call to {string} {string} API using GET method with lat {string} and lon {string} query param value")
+    public void get_Call_To_Hrone_Account_API_QueryParam(String endPointGroup,String endPointName,String latitude,String longitude) throws Throwable {
+        param.put("lat",latitude );
+        param.put("lon",longitude);
+        response = apiPage.getRequestWithQueryParams(endPointGroup, endPointName, param);
         Assert.assertEquals(200, response.extract().statusCode());
     }
     

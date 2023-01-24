@@ -16,6 +16,7 @@ import java.util.Scanner;
 import io.restassured.response.Response;
 import java.util.logging.Logger;
 import org.json.JSONObject;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.json.Json;
 import org.testng.Assert;
 
@@ -32,8 +33,9 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 
-public class RestWrapper extends BaseClass{
+public class RestWrapper extends AuthenticationToken{
     private int responseCode;
+    public static WebDriver driver;
     private final Logger logger = Logger.getLogger(this.getClass().getName());
     private ValidatableResponse response;
     private Response res;
@@ -49,7 +51,6 @@ public class RestWrapper extends BaseClass{
     		        setParam("http.connection-manager.timeout",500000));
     }
     String filePath = System.getProperty("user.dir");
-    String DataFilepath = filePath+"/src/test/resources/data/tempdata.txt";
     public ValidatableResponse getResponse() {
         return response;
     }
@@ -229,22 +230,8 @@ public class RestWrapper extends BaseClass{
 
     public Map<String, String> setHeaders() throws Throwable {
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/json");
-        headers.put("Authorization","Bearer "+getBearerTokenValue(PropFileHandler.readProperty("authentication_host")));
-        return headers;
-
-    }
-
-    public Map<String, String> setHeaders(Map<String, String> specificHeaders) throws Throwable {
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/json");
-        /*try {
-            headers.put("Authorization", iaMtokenServiceObject.getTokeId(Login.getUserID(), Login.getPassword()));
-        } catch (Exception e) {
-            headers.put("Authorization", iaMtokenServiceObject.getTokeId(propertyHandler.readProperty("userNameHO"), propertyHandler.readProperty("pwdHO")));
-        }*/
-        headers.put("Authorization", "Bearer "+getBearerTokenValue(PropFileHandler.readProperty("authentication_host")));
-        headers.putAll(specificHeaders);
+        headers.put("X-RapidAPI-Host", "weatherbit-v1-mashape.p.rapidapi.com");
+        headers.put("X-RapidAPI-Key",getBearerTokenValue());
         return headers;
 
     }

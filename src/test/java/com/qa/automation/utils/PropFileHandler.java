@@ -11,7 +11,6 @@ import org.json.simple.parser.JSONParser;
 public class PropFileHandler {
     public static Properties config = new Properties();
 
-
     public static String readProperty(String property) {
         String value;
         try {
@@ -34,7 +33,7 @@ public class PropFileHandler {
         String APIEndPoint = null;
         try {
             String filePath = System.getProperty("user.dir");
-            String DataFilepath = filePath+"/src/test/resources/testdata/API_endpoint.json";
+            String DataFilepath = filePath + "/src/test/resources/testdata/API_endpoint.json";
             Object obj = parser.parse(new FileReader(DataFilepath));
             JSONObject jsonObject = (JSONObject) obj;
             JSONObject endPointGroup = (JSONObject) jsonObject.get(groupName);
@@ -45,12 +44,13 @@ public class PropFileHandler {
         }
         return APIEndPoint;
     }
-    
+
     public static String readAPIJsonFile(String groupName, String endPointName, String param1) {
         return readAPIJsonFile(groupName, endPointName) + "/" + param1;
     }
-    
-    public static String readAPIJsonFile(String groupName, String endPointName, String param1, String param2) {
+
+    public static String readAPIJsonFile(String groupName, String endPointName, String param1,
+            String param2) {
         return readAPIJsonFile(groupName, endPointName, param1) + "/" + param2;
     }
 
