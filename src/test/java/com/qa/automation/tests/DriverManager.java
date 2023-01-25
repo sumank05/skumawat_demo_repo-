@@ -56,9 +56,9 @@ public class DriverManager {
 
         if (server.equalsIgnoreCase("local")) {
             if (browser.equalsIgnoreCase("chrome")) {
-
+              WebDriverManager.chromedriver().setup();
                 // System.setProperty("webdriver.chrome.driver","src/test/resources/SeleniumWebdrivers/chromedriver.exe");
-                WebDriverManager.chromedriver().version("109.0.5414.74").setup();
+//                WebDriverManager.chromedriver().version("109.0.5414.74").setup();
                 driver = new ChromeDriver();
                 System.out.print("ChromeDriver initialized!");
             }
