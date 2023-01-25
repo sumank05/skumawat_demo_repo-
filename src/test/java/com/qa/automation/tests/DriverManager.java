@@ -26,7 +26,7 @@ public class DriverManager {
     private static String server;
     private static String sheetName;
     private static DesiredCapabilities cap = new DesiredCapabilities();
-    
+
     public static WebDriver getWebDriver() {
         if (driver == null) {
             initialize();
@@ -35,8 +35,10 @@ public class DriverManager {
     }
 
     private static void initialize() {
-        Reporter.log("************************************** Session Started **************************************", true);
-        
+        Reporter.log(
+                "************************************** Session Started **************************************",
+                true);
+
         browser = System.getProperty("browser");
         server = System.getProperty("server");
         // sheetName=System.getProperty("sheetName");
@@ -56,9 +58,9 @@ public class DriverManager {
 
         if (server.equalsIgnoreCase("local")) {
             if (browser.equalsIgnoreCase("chrome")) {
-              WebDriverManager.chromedriver().setup();
+                // WebDriverManager.chromedriver().setup();
                 // System.setProperty("webdriver.chrome.driver","src/test/resources/SeleniumWebdrivers/chromedriver.exe");
-//                WebDriverManager.chromedriver().version("109.0.5414.74").setup();
+                WebDriverManager.chromedriver().version("109.0.5414.74").setup();
                 driver = new ChromeDriver();
                 System.out.print("ChromeDriver initialized!");
             }
@@ -160,11 +162,15 @@ public class DriverManager {
 
     public static void quitSession() {
         driver.quit();
-        Reporter.log("************************************** Session closed **************************************", true);
+        Reporter.log(
+                "************************************** Session closed **************************************",
+                true);
     }
 
     public static void closeWindow() {
         driver.close();
-        Reporter.log("************************************** Window closed **************************************", true);
+        Reporter.log(
+                "************************************** Window closed **************************************",
+                true);
     }
 }

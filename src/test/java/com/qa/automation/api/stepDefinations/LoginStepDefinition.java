@@ -53,7 +53,7 @@ public class LoginStepDefinition extends BaseFunctions {
         login.selectPriceRange(price_range);
      }
     
-    @Then("I verify results product price is less than selected {string}")
+    @Then("I verify results product price is within selected {string}")
     public void verifySelectedProductRange(String range) {
        
        int productPrice =  login.verifyProductPriceRange();

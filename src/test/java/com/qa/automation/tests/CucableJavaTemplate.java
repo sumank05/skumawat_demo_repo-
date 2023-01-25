@@ -9,5 +9,6 @@ import org.junit.runner.RunWith;
         glue = {"com.qa.automation.api.stepDefinations"},
         plugin = {"pretty", "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"})
 
+
 public class CucableJavaTemplate {
 }
