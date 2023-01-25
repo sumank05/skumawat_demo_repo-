@@ -5,6 +5,7 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Attachment;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -12,10 +13,19 @@ import io.restassured.response.ResponseBody;
 import io.restassured.response.ResponseBodyExtractionOptions;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.testng.Reporter;
 import net.rcarz.jiraclient.BasicCredentials;
 import net.rcarz.jiraclient.CustomFieldOption;
 import net.rcarz.jiraclient.Field;
@@ -24,6 +34,7 @@ import net.rcarz.jiraclient.JiraClient;
 import net.rcarz.jiraclient.JiraException;
 
 import com.qa.automation.actions.API_PageActions;
+import com.qa.automation.actions.Login_PageActions;
 import com.qa.automation.utils.PropFileHandler;
 
 public class CommonApiStepDefinations {
@@ -94,6 +105,8 @@ public class CommonApiStepDefinations {
 
   private void afterExecutionSetup(Scenario scenario) {
     if (scenario.isFailed()) {
+      Login_PageActions login = new Login_PageActions();
+      login.takeScreenshot(scenario);
       System.out.println("[INFO]: Scenario Tag Name >" + scenario.getSourceTagNames().toString());
 //      JIRAReport(scenario, scenario.getSourceTagNames().toString());
       for (String tags : scenario.getSourceTagNames()) {
@@ -104,6 +117,7 @@ public class CommonApiStepDefinations {
       }
     }
   }
+ 
 
 
 
