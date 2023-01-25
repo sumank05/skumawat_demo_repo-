@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriverException;
 import com.qa.automation.actions.Login_PageActions;
 import com.qa.automation.utils.BaseFunctions;
 import com.qa.automation.utils.PropFileHandler;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -61,7 +63,6 @@ public class LoginStepDefinition extends BaseFunctions {
        System.out.println("prductPrice: " + productPrice + " range: " + lowerRange + ", " + upperRange);
        Assert.assertTrue(productPrice < upperRange);
        Assert.assertTrue(productPrice > lowerRange);
-       //driver.quit();
      }
     
     

@@ -1,8 +1,14 @@
 {
-	"Weather": {
-		"5DayForecast":"/forecast/3hourly",
-		"CurrentWeather":"/current",
-		"TimelyForecast":"forecast/minutely",
-		"SevereAlerts" : "/alerts"
+	"Authentication": {
+		"AccessToken": "/oauth2/token"
+	},
+	"Account": {
+		"LogOnUserDetail": "/LogOnUser/LogOnUserDetail",
+		"LogOnUserPassword": "/LogOnUser/Password",
+		"PageActionRights": "/LogOnUser/refresh/LogOnUser/PageAccessRight",
+		"UserLogOff": "/LogOnUser/LogOff",
+		"UserChatToken": "/LogOnUser/chat/token",
+		"AuditTrail" : "/LogOnUser/AuditTrail"
 	}
+	
 }

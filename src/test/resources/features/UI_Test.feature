@@ -1,8 +1,8 @@
 #Author: your.email@your.domain.com
 
-Feature: Login Page
+Feature: Amazon App UI Automation
 
-  Scenario Outline: Title of your scenario
+  Scenario Outline: Verifying thr selected product price range
     Given I launch the amazon app
     Then I verify the page is launched
     Then I verify search bar on amazon website
@@ -16,6 +16,8 @@ Examples:
     | earphones 		| 	₹1,000 - ₹5,000 |
     | book 					| 	₹100 - ₹200 |
     |washing machine|		₹10,000 - ₹15,000 |
+    
+  
     
     
     

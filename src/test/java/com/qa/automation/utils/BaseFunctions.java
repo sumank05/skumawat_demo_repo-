@@ -56,8 +56,9 @@ public class BaseFunctions {
     }
     
     public void closeApplication() {
-        DriverManager.quitSession();
         DriverManager.closeWindow();
+        DriverManager.quitSession();
+        
     }
 
     protected void waitTOSync() {

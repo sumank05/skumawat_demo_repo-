@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -30,19 +31,18 @@ public class PropFileHandler {
 
     public static String readAPIJsonFile(String groupName, String endPointName) {
         JSONParser parser = new JSONParser();
-        String APIEndPoint = null;
+        String apiEndPoint = null;
         try {
             String filePath = System.getProperty("user.dir");
             String DataFilepath = filePath + "/src/test/resources/testdata/API_endpoint.json";
             Object obj = parser.parse(new FileReader(DataFilepath));
             JSONObject jsonObject = (JSONObject) obj;
             JSONObject endPointGroup = (JSONObject) jsonObject.get(groupName);
-            APIEndPoint = (String) endPointGroup.get(endPointName);
-
+            apiEndPoint = (String) endPointGroup.get(endPointName);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return APIEndPoint;
+        return apiEndPoint;
     }
 
     public static String readAPIJsonFile(String groupName, String endPointName, String param1) {
