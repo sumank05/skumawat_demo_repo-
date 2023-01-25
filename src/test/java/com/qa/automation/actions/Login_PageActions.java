@@ -106,7 +106,8 @@ public class Login_PageActions extends BaseFunctions {
 
   @Attachment
     public byte[] takeScreenshot(Scenario scenario) {
-     if(!(driver==null)) {
+    System.out.println("driver   :"+driver);
+     if(driver!=null) {
       DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_hh_mm_a");
       Date date = new Date();
       String date_time = dateFormat.format(date);

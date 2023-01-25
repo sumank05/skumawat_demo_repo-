@@ -54,7 +54,7 @@ public class CommonApiStepDefinations {
     public void get_Call_To_API_With_Parameter(String endPointGroup, String endPointName,
             String param) throws Throwable {
         response = apiPage.getRequestWithSinglePathParam(endPointGroup, endPointName, param);
-        Assert.assertEquals(200, response.extract().statusCode());
+        Assert.assertEquals(201, response.extract().statusCode());
     }
 
     @Given("I want to make a get call to {string} {string} API using GET method with {string} query param value")
@@ -89,15 +89,14 @@ public class CommonApiStepDefinations {
   private void JIRAReport(Scenario scenario, String tags) {
     String testcaseName = scenario.getName().toUpperCase().trim();
     String m = "[FAILED]: Scenario Name: " + testcaseName + "got failed due to some assertion or exception";
-    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "JnB7B4sy2fAk86UqO4gmE221");
+    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "GktHI6mCx7U0qW33zJpt50B8");
     JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/",creds);
     Issue issue;
     try {
       System.out.println(tags);
       issue = jira.getIssue(tags);
       issue.addComment(m);
-      System.out.println(issue.transition());
-      issue.transition().execute("In Development");
+      issue.transition().execute("Backlog");
     } catch (JiraException e) {
       e.printStackTrace();
     }
@@ -105,13 +104,11 @@ public class CommonApiStepDefinations {
 
   private void afterExecutionSetup(Scenario scenario) {
     if (scenario.isFailed()) {
-      Login_PageActions login = new Login_PageActions();
-      login.takeScreenshot(scenario);
+//      Login_PageActions login = new Login_PageActions();
+//      login.takeScreenshot(scenario);
       System.out.println("[INFO]: Scenario Tag Name >" + scenario.getSourceTagNames().toString());
-//      JIRAReport(scenario, scenario.getSourceTagNames().toString());
       for (String tags : scenario.getSourceTagNames()) {
         if (tags.contains("DEMO-")) {
-          System.out.println("-----------.......-dasdal----------"+tags);
           JIRAReport(scenario, tags.split("@")[1]);
         }
       }
