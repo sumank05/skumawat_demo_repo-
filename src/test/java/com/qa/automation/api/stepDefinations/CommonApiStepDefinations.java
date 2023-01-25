@@ -13,7 +13,6 @@ import io.restassured.response.ResponseBody;
 import io.restassured.response.ResponseBodyExtractionOptions;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
-import static com.qait.automation.getpageobjects.Constants.saveScreenshotImgFile;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
