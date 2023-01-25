@@ -1,5 +1,7 @@
 package com.qa.automation.api.stepDefinations;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,6 +16,12 @@ import java.util.HashMap;
 import java.util.Map;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
+import net.rcarz.jiraclient.BasicCredentials;
+import net.rcarz.jiraclient.CustomFieldOption;
+import net.rcarz.jiraclient.Field;
+import net.rcarz.jiraclient.Issue;
+import net.rcarz.jiraclient.JiraClient;
+import net.rcarz.jiraclient.JiraException;
 
 import com.qa.automation.actions.API_PageActions;
 import com.qa.automation.utils.PropFileHandler;
@@ -60,6 +68,43 @@ public class CommonApiStepDefinations {
         String reponseValue = apiPage.verifyResponseValueForAPI(response);
         Assert.assertEquals(reponseValue, PropFileHandler.readProperty("username"));
     }
+
+  @After
+  public void screenShotAndConsoleLog(Scenario scenario) {
+    System.out.println("inside After call");
+    afterExecutionSetup(scenario);
+  }
+
+  private void JIRAReport(Scenario scenario, String tags) {
+    String testcaseName = scenario.getName().toUpperCase().trim();
+    String m = "[FAILED]: Scenario Name: " + testcaseName + "got failed due to some assertion or exception";
+    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "JnB7B4sy2fAk86UqO4gmE221");
+    JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/",creds);
+    Issue issue;
+    try {
+      System.out.println(tags);
+      issue = jira.getIssue(tags);
+      issue.addComment(m);
+      System.out.println(issue.transition());
+      issue.transition().execute("In Development");
+    } catch (JiraException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void afterExecutionSetup(Scenario scenario) {
+    if (scenario.isFailed()) {
+      System.out.println("[INFO]: Scenario Tag Name >" + scenario.getSourceTagNames().toString());
+//      JIRAReport(scenario, scenario.getSourceTagNames().toString());
+      for (String tags : scenario.getSourceTagNames()) {
+        if (tags.contains("DEMO-")) {
+          System.out.println("-----------.......-dasdal----------"+tags);
+          JIRAReport(scenario, tags.split("@")[1]);
+        }
+      }
+    }
+  }
+
 
 
 
