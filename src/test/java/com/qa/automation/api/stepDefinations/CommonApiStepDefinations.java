@@ -104,7 +104,7 @@ public class CommonApiStepDefinations {
   private void JIRAPassReport(Scenario scenario, String tags) {
     String testcaseName = scenario.getName().toUpperCase().trim();
     String m = "[Pass]: Automated Scenario Name: " + testcaseName;
-    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "4VaKlCoAPXWVDGpNSqAg1A81");
+    BasicCredentials creds = new BasicCredentials("sumankumawat@rtctek.com", "Sumsa@123");
     JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/",creds);
     Issue issue;
     try {
