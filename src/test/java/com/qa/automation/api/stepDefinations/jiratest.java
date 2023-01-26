@@ -14,7 +14,7 @@ import net.rcarz.jiraclient.greenhopper.Sprint;
 public class jiratest {
 
   public static void main(String[] args) {
-    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "GktHI6mCx7U0qW33zJpt50B8");
+    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "4VaKlCoAPXWVDGpNSqAg1A81");
     JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/",creds);
     GreenHopperClient gh = new GreenHopperClient(jira);
     try {

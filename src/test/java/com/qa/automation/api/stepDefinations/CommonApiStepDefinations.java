@@ -86,10 +86,10 @@ public class CommonApiStepDefinations {
     afterExecutionSetup(scenario);
   }
 
-  private void JIRAReport(Scenario scenario, String tags) {
+  private void JIRAFailReport(Scenario scenario, String tags) {
     String testcaseName = scenario.getName().toUpperCase().trim();
-    String m = "[FAILED]: Scenario Name: " + testcaseName + "got failed due to some assertion or exception";
-    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "FZFZ75uP33kUHlXUndIY596A");
+    String m = "[FAILED]: Automated Scenario Name: " + testcaseName + "got failed due to some assertion or exception";
+    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "4VaKlCoAPXWVDGpNSqAg1A81");
     JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/",creds);
     Issue issue;
     try {
@@ -97,11 +97,28 @@ public class CommonApiStepDefinations {
       issue = jira.getIssue(tags);
       issue.addComment(m);
       issue.transition().execute("Backlog");
+      System.out.println("JIRA moved and comments for issue: "+tags);
     } catch (JiraException e) {
       e.printStackTrace();
     }
   }
-
+  private void JIRAPassReport(Scenario scenario, String tags) {
+    String testcaseName = scenario.getName().toUpperCase().trim();
+    String m = "[Pass]: Automated Scenario Name: " + testcaseName;
+    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "4VaKlCoAPXWVDGpNSqAg1A81");
+    JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/",creds);
+    Issue issue;
+    try {
+      System.out.println(tags);
+      issue = jira.getIssue(tags);
+      issue.addComment(m);
+      issue.transition().execute("Done");
+      System.out.println("JIRA moved and comments for issue: "+tags);
+    } catch (JiraException e) {
+      e.printStackTrace();
+    }
+  }
+  
   private void afterExecutionSetup(Scenario scenario) {
     if (scenario.isFailed()) {
 //      Login_PageActions login = new Login_PageActions();
@@ -109,9 +126,17 @@ public class CommonApiStepDefinations {
       System.out.println("[INFO]: Scenario Tag Name >" + scenario.getSourceTagNames().toString());
       for (String tags : scenario.getSourceTagNames()) {
         if (tags.contains("DEMO-")) {
-          JIRAReport(scenario, tags.split("@")[1]);
+          JIRAFailReport(scenario, tags.split("@")[1]);
+          
         }
       }
+    } else {
+      for (String tags : scenario.getSourceTagNames()) {
+        if (tags.contains("DEMO-")) {
+          JIRAPassReport(scenario, tags.split("@")[1]);
+        }
+      }
+      
     }
   }
  
