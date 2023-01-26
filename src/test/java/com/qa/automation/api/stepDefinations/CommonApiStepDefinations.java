@@ -89,7 +89,7 @@ public class CommonApiStepDefinations {
   private void JIRAReport(Scenario scenario, String tags) {
     String testcaseName = scenario.getName().toUpperCase().trim();
     String m = "[FAILED]: Scenario Name: " + testcaseName + "got failed due to some assertion or exception";
-    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "GktHI6mCx7U0qW33zJpt50B8");
+    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "FZFZ75uP33kUHlXUndIY596A");
     JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/",creds);
     Issue issue;
     try {
