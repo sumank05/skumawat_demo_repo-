@@ -82,7 +82,6 @@ public class CommonApiStepDefinations {
 
   @After
   public void screenShotAndConsoleLog(Scenario scenario) {
-    System.out.println("inside After call");
     afterExecutionSetup(scenario);
   }
 

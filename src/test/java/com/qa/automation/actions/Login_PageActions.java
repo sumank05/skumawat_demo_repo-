@@ -13,6 +13,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Reporter;
 import com.qa.automation.utils.BaseFunctions;
+import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
 import io.qameta.allure.Attachment;
 
@@ -103,6 +104,12 @@ public class Login_PageActions extends BaseFunctions {
     }
     return Integer.parseInt(price);
   }
+  
+
+  @After
+  public void screenShotAndConsoleLog(Scenario scenario) {
+    takeScreenshot(scenario);
+  }
 
   @Attachment
     public byte[] takeScreenshot(Scenario scenario) {
@@ -123,7 +130,6 @@ public class Login_PageActions extends BaseFunctions {
       }
       File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
       byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-//      scenario.embed(screenshot, "image/png");
       try {
         Reporter.log("[INFO]: Save Image File Path : " + SShot, true);
         FileUtils.copyFile(scrFile, new File(SShot));
