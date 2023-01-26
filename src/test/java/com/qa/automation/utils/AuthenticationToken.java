@@ -25,12 +25,13 @@ public class AuthenticationToken {
                 .param("loginType", 1)
                 .param("companyDomainCode", PropFileHandler.readProperty("companyDomainCode"))
                 .param("isEncrypted", 1);
-        //System.out.println("????????????????????????????????? "+request.log().all());
+        System.out.println("????????????????????????????????? "+request.log().all());
         Response response = request.post();
         JsonPath jsonPathEvaluator = response.jsonPath();
         String access_token = "INVALID";
         try {
             access_token = jsonPathEvaluator.get("access_token");
+            System.out.println("$$$$$$$$$$$"+access_token);
         } catch (Exception e) {
             System.out.println("ERROR: Access Token NOT Found!! Exception: " + e);
         }

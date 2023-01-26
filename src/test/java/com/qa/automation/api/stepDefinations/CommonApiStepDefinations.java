@@ -54,7 +54,7 @@ public class CommonApiStepDefinations {
     public void get_Call_To_API_With_Parameter(String endPointGroup, String endPointName,
             String param) throws Throwable {
         response = apiPage.getRequestWithSinglePathParam(endPointGroup, endPointName, param);
-        Assert.assertEquals(201, response.extract().statusCode());
+        Assert.assertEquals(200, response.extract().statusCode());
     }
 
     @Given("I want to make a get call to {string} {string} API using GET method with {string} query param value")
