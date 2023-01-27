@@ -80,7 +80,7 @@ public class CommonApiStepDefinations {
         Assert.assertEquals(reponseValue, PropFileHandler.readProperty("username"));
     }
 
-
+ 
 
 
 
