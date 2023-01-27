@@ -88,7 +88,7 @@ public class CommonApiStepDefinations {
   private void JIRAFailReport(Scenario scenario, String tags) {
     String testcaseName = scenario.getName().toUpperCase().trim();
     String m = "[FAILED]: Automated Scenario Name: " + testcaseName + "got failed due to some assertion or exception";
-    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "Et67b9Il0NG3vabqjKKd3D81");
+    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "B0Fk5oczFNPeNXUvvEFd07C0");
     JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/",creds);
     Issue issue;
     try {
@@ -104,7 +104,7 @@ public class CommonApiStepDefinations {
   private void JIRAPassReport(Scenario scenario, String tags) {
     String testcaseName = scenario.getName().toUpperCase().trim();
     String m = "[Pass]: Automated Scenario Name: " + testcaseName;
-    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "Et67b9Il0NG3vabqjKKd3D81");
+    BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "B0Fk5oczFNPeNXUvvEFd07C0");
     JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/",creds);
     Issue issue;
     try {

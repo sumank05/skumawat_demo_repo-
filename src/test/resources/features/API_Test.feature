@@ -8,7 +8,6 @@ Feature: Demo Api's feature
   Given I want to make a get call to "Announcement" "TriggerType" API using GET method
  
   @DEMO-1
-
   Scenario: Validate get call to Page Access rights with Mobile Parameter
   Given I want to make a get call to "Account" "PageActionRights" API using GET method with parameter "M" value
   
