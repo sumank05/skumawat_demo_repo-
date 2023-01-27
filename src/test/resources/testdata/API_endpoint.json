@@ -8,7 +8,9 @@
 		"PageActionRights": "/LogOnUser/refresh/LogOnUser/PageAccessRight",
 		"UserLogOff": "/LogOnUser/LogOff",
 		"UserChatToken": "/LogOnUser/chat/token",
-		"AuditTrail" : "/LogOnUser/AuditTrail"
+		"AuditTrail": "/LogOnUser/AuditTrail"
+	},
+	"Announcement": {
+		"TriggerType": "/Engage/Announcement/TriggerType"
 	}
-	
 }
