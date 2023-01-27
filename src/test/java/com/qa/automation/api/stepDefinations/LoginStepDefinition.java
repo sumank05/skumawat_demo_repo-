@@ -90,7 +90,7 @@ public class LoginStepDefinition extends BaseFunctions {
     private void JIRAFailReport(Scenario scenario, String tags) {
       String testcaseName = scenario.getName().toUpperCase().trim();
       String m = "[FAILED]: Automated Scenario Name: " + testcaseName + "got failed due to some assertion or exception";
-      BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "P3yQnNwaIawPVnWqbQJXB36C");
+      BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", System.getProperty("JIRAToken"));
       JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/",creds);
       Issue issue;
       try {
@@ -106,7 +106,7 @@ public class LoginStepDefinition extends BaseFunctions {
     private void JIRAPassReport(Scenario scenario, String tags) {
       String testcaseName = scenario.getName().toUpperCase().trim();
       String m = "[Pass]: Automated Scenario Name: " + testcaseName;
-      BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", "P3yQnNwaIawPVnWqbQJXB36C");
+      BasicCredentials creds = new BasicCredentials("testingdemo.17@gmail.com", System.getProperty("JIRAToken"));
       JiraClient jira = new JiraClient("https://rtcdemo.atlassian.net/",creds);
       Issue issue;
       try {
@@ -142,8 +142,8 @@ public class LoginStepDefinition extends BaseFunctions {
     }
     @Attachment
     public byte[] takeScreenshot(Scenario scenario) {
-    System.out.println("driver   :"+driver);
-     if(driver!=null) {
+     
+     if (scenario.isFailed())  {
       DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_hh_mm_a");
       Date date = new Date();
       String date_time = dateFormat.format(date);
