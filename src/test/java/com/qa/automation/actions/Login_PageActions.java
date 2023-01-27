@@ -106,38 +106,7 @@ public class Login_PageActions extends BaseFunctions {
   }
   
 
-  @After
-  public void screenShotAndConsoleLog(Scenario scenario) {
-    takeScreenshot(scenario);
-  }
+ 
 
-  @Attachment
-    public byte[] takeScreenshot(Scenario scenario) {
-    System.out.println("driver   :"+driver);
-     if(driver!=null) {
-      DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_hh_mm_a");
-      Date date = new Date();
-      String date_time = dateFormat.format(date);
-      final String saveScreenshotImgFile =
-          System.getProperty("user.dir") + File.separator + "target";;
-      String SShot =
-          saveScreenshotImgFile + File.separator + date_time + File.separator + "_screenshot_.png";
-
-      File file = new File(saveScreenshotImgFile);
-      boolean exists = file.exists();
-      if (!exists) {
-        new File(saveScreenshotImgFile).mkdir();
-      }
-      File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-      byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-      try {
-        Reporter.log("[INFO]: Save Image File Path : " + SShot, true);
-        FileUtils.copyFile(scrFile, new File(SShot));
-      } catch (IOException e) {
-      }
-      return screenshot;
-     }
-    return null;
-  }
 
 }
