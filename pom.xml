@@ -66,6 +66,7 @@
 					<!--<sourceFeatures>src/test/resources/features/testfeature/MyTest1.feature:8:19</sourceFeatures>-->
 					<generatedFeatureDirectory>${generated.feature.directory}</generatedFeatureDirectory>
 					<generatedRunnerDirectory>${generated.runner.directory}</generatedRunnerDirectory>
+					<includeScenarioTags>${tag}</includeScenarioTags>
 					<!-- optional: custom data that is available in Cucable placeholders in a template -->
 					<!--<customPlaceholders>-->
 					<!--<comment>This should appear inside the template</comment>-->
@@ -81,7 +82,7 @@
 					<!--<parallelizationMode>features</parallelizationMode>-->
 					<!-- optional: number of test runs to create runners and features multiple times
                          if set to a number greater than 1 -->
-					<!--<numberOfTestRuns>1</numberOfTestRuns>-->
+					<numberOfTestRuns>1</numberOfTestRuns>
 					<!-- optional: generate a fixed number of runners and distribute all features round-robin.
                      This can only be used if desiredNumberOfFeaturesPerRunner is NOT used! -->
 					<!--<desiredNumberOfRunners>2</desiredNumberOfRunners>-->
@@ -110,7 +111,6 @@
 					<argLine>
                     -javaagent:"${settings.localRepository}\org\aspectj\aspectjweaver\${aspectj.version}\aspectjweaver-${aspectj.version}.jar"
                 </argLine>
-<<<<<<< HEAD
 					<classesDirectory>${basedir}/target/</classesDirectory>
 					<includes>
 						<include>**/*_IT.java</include>
@@ -303,6 +303,11 @@
 			<groupId>com.opencsv</groupId>
 			<artifactId>opencsv</artifactId>
 			<version>${opencsv.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>tag-expressions</artifactId>
+			<version>4.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
