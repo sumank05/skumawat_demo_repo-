@@ -14,7 +14,7 @@ Examples:
     | product       | price-range |
     
     | earphones 		| 	₹1,000 - ₹5,000 |
-    | book 					| 	₹100 - ₹200 |
+    | book 					| 	₹200 - ₹500 |
     |washing machine|		₹10,000 - ₹15,000 |
     
     
