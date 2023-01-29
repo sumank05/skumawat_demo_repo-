@@ -76,15 +76,15 @@ public class LoginStepDefinition extends BaseFunctions {
        int lowerRange = intRange[0];
        int upperRange = intRange[1];
        System.out.println("prductPrice: " + productPrice + " range: " + lowerRange + ", " + upperRange);
-       Assert.assertTrue(productPrice < upperRange);
-       Assert.assertTrue(productPrice > lowerRange);
+       Assert.assertTrue("Assert Error : The Product Price is " +productPrice+ " and upper range is "+upperRange, productPrice < upperRange);
+       Assert.assertTrue("Assert Error : The Product Price is " +productPrice+ " and lower range is "+lowerRange,productPrice > lowerRange);
      }
     
 
     @After
     public void screenShotAndConsoleLog(Scenario scenario) {
       afterExecutionSetup(scenario);
-      takeScreenshot(scenario);
+      embedScreenshot(scenario);
     }
 
     private void JIRAFailReport(Scenario scenario, String tags) {
@@ -140,41 +140,51 @@ public class LoginStepDefinition extends BaseFunctions {
         
       }
     }
-    @Attachment
-    public byte[] takeScreenshot(Scenario scenario) {
+//    @Attachment
+//    public byte[] takeScreenshot(Scenario scenario) {
      
-     if (scenario.isFailed())  {
-      DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_hh_mm_a");
-      Date date = new Date();
-      String date_time = dateFormat.format(date);
-      final String saveScreenshotImgFile =
-          System.getProperty("user.dir") + File.separator + "target";;
-      String SShot =
-          saveScreenshotImgFile + File.separator + date_time + File.separator + "_screenshot_.png";
-
-      File file = new File(saveScreenshotImgFile);
-      boolean exists = file.exists();
-      if (!exists) {
-        new File(saveScreenshotImgFile).mkdir();
-      }
-      File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-      byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-      try {
-        Reporter.log("[INFO]: Save Image File Path : " + SShot, true);
-        FileUtils.copyFile(scrFile, new File(SShot));
-      } catch (IOException e) {
-      }
-      return screenshot;
-     }
-    return null;
-  }
+//     if (scenario.isFailed())  {
+//      DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_hh_mm_a");
+//      Date date = new Date();
+//      String date_time = dateFormat.format(date);
+//      final String saveScreenshotImgFile =
+//          System.getProperty("user.dir") + File.separator + "target";;
+//      String SShot =
+//          saveScreenshotImgFile + File.separator + date_time + File.separator + "_screenshot_.png";
+//
+//      File file = new File(saveScreenshotImgFile);
+//      boolean exists = file.exists();
+//      if (!exists) {
+//        new File(saveScreenshotImgFile).mkdir();
+//      }
+//      File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//      byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//      try {
+//        Reporter.log("[INFO]: Save Image File Path : " + SShot, true);
+//        FileUtils.copyFile(scrFile, new File(SShot));
+//      } catch (IOException e) {
+//      }
+//      return screenshot;
+//     }
+//    return null;
     
-    
-    
-    
-    
-
-  
-
-
+        
+        public void embedScreenshot(Scenario scenario) {
+            if (scenario.isFailed()) {
+                try {
+                    final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+                    scenario.attach(screenshot, "image/png", null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            
+        }
+        
 }
+
+
+        
+ 
+    
+   

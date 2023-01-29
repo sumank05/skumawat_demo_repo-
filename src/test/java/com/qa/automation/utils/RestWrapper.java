@@ -22,6 +22,7 @@ import org.testng.Assert;
 
 import com.google.gson.JsonParser;
 import groovy.transform.options.PropertyHandler;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.HttpClientConfig;
@@ -156,7 +157,7 @@ public class RestWrapper extends AuthenticationToken {
         logger.info("Service URL is  : " + host + endPointUrl);
         logger.info("Payload is : " + postBody);
         logger.info("Headers are : " + headers);
-        response = given().spec(requestSpec).headers(headers).post().then().log().status();
+        response = given().spec(requestSpec).headers(headers).filter(new AllureRestAssured()).post().then().log().status();
         logger.info("Service URL :" + host + endPointUrl);
         return response;
     }
@@ -178,7 +179,7 @@ public class RestWrapper extends AuthenticationToken {
             RequestSpecification requestSpec = builder.build();
             System.out.println("Suman at simpleGetCall requestSpec: " + requestSpec);
             logger.info(headers.toString());
-            response = given().log().all().spec(requestSpec).headers(headers).get().then().log()
+            response = given().log().all().spec(requestSpec).headers(headers).filter(new AllureRestAssured()).get().then().log()
                     .status();
             logger.info("Service URL :" + host + endPointUrl);
             if (response.extract().statusCode() == 200 || response.extract().statusCode() == 201)

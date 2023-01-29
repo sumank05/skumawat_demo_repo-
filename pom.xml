@@ -29,6 +29,7 @@
 		<generated.feature.directory>${project.build.directory}/parallel/features</generated.feature.directory>
 		<allure.maven.version>2.10.0</allure.maven.version>
 		<allure.cucumber5.version>2.14.0</allure.cucumber5.version>
+		<allure.rest-assured.version>2.14.0</allure.rest-assured.version>
 		<aspectj.version>1.9.8</aspectj.version>
 	</properties>
 	<build>
@@ -100,12 +101,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M5</version>
-				 <configuration>
-				 <systemPropertyVariables>
-                        <environment>${JIRAToken}</environment>
-                      
-                    </systemPropertyVariables>
-                     </configuration>
+				<configuration>
+					<systemPropertyVariables>
+						<environment>${JIRAToken}</environment>
+					</systemPropertyVariables>
+				</configuration>
 				<!--<configuration>
 					<testFailureIgnore>false</testFailureIgnore>
 					<argLine>
@@ -409,22 +409,31 @@
 			<version>3.0.0</version>
 			<scope>test</scope>
 		</dependency>
-<!-- https://mvnrepository.com/artifact/net.rcarz/jira-client -->
-<dependency>
-    <groupId>net.rcarz</groupId>
-    <artifactId>jira-client</artifactId>
-    <version>0.5</version>
-</dependency>
-
+		<!--Allure Reporting Dependency-->
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-rest-assured</artifactId>
+			<version>${allure.rest-assured.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.31</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.rcarz/jira-client -->
+		<dependency>
+			<groupId>net.rcarz</groupId>
+			<artifactId>jira-client</artifactId>
+			<version>0.5</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
-
 		<dependency>
 			<groupId>com.relevantcodes</groupId>
 			<artifactId>extentreports</artifactId>
 			<version>2.41.2</version>
 		</dependency>
 	</dependencies>
-	
 	<profiles>
 		<profile>
 			<id>api-tests</id>
