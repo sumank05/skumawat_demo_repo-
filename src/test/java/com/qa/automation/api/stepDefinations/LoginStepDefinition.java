@@ -43,7 +43,7 @@ public class LoginStepDefinition extends BaseFunctions {
             waitTOSync();
             launchApplication(PropFileHandler.readProperty("appUrl"));
         }
-        hardWait(20);
+        hardWait(5);
     }
     
     @Then("I verify the page is launched")
